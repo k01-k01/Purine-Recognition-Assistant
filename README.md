@@ -1,84 +1,95 @@
+
 # 嘌呤识别助手
 
-基于AI的食物识别和尿酸含量分析应用，帮助痛风患者科学饮食。
+本项目是一个基于 YOLO + ResNet50 融合模型的食物识别与尿酸分析系统，后端采用 FastAPI 框架，前端基于 Next.js。支持拍照或上传图片自动识别食物类别，分析嘌呤含量并给出痛风饮食建议。
 
-## 功能特性
+## 主要功能
 
-- 🍽️ **智能识别**: 拍照或上传图片，AI自动识别食物
-- 🧬 **尿酸分析**: 提供详细的嘌呤含量信息
-- 📊 **营养估算**: 计算食物的营养成分
-- 🎯 **饮食建议**: 针对痛风患者的专业建议
-- 🚀 **高性能**: 基于YOLO+ResNet融合模型
+- 🍽️ **食物识别**：拍照或上传图片，自动检测食物区域并分类
+- 🧬 **尿酸分析**：结合食物数据库，输出嘌呤含量及痛风建议
+- 📊 **营养估算**：展示热量、蛋白质、脂肪等营养信息
+- 🎯 **饮食建议**：针对痛风患者的个性化推荐
+- � **高性能推理**：融合 YOLOv8 检测与 ResNet50 分类，支持 GPU 加速
+
+## 技术架构
+
+```
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│ 前端应用     │◄──►│ FastAPI后端 │◄──►│  AI模型层   │
+│ Next.js/TS  │    │ API服务     │    │ YOLO+ResNet │
+└─────────────┘    └─────────────┘    └─────────────┘
+```
+
+## 数据集与模型训练
+
+- 使用 Food20_new 数据集（20类食物，约400张/类）
+- 自动转换为 YOLO 格式，支持目标检测与分类
+- 训练脚本：`backend/scripts/train_food20_models.py`
+- 支持自定义训练参数与数据增强
+- 输出模型：
+  - `models/resnet_food20_classifier.pth`（ResNet分类器）
+  - `models/yolo_food20_detector.pt`（YOLO检测器）
+
+### 数据集结构
+```
+datasets/Food20_new/
+├── train/
+│   ├── images/
+│   └── train.json
+├── val/
+│   ├── images/
+│   └── val.json
+└── test/
+    ├── images/
+    └── test.json
+```
+
+### 训练命令示例
+```bash
+# 安装依赖
+pip install -r backend/requirements.txt
+
+# 训练ResNet分类器
+python backend/scripts/train_food20_models.py --model resnet
+
+# 训练YOLO检测器
+python backend/scripts/train_food20_models.py --model yolo
+
+# 评估模型
+python backend/scripts/train_food20_models.py --evaluate
+```
 
 ## 快速开始
 
-### 1. 环境要求
-
+### 环境要求
 - Node.js 16+
 - Python 3.8+
-- 至少4GB内存
+- 推荐GPU
 
-### 2. 安装依赖
-
+### 安装依赖
 ```bash
-# 安装前端依赖
+# 前端依赖
 npm install
-
-# 安装后端依赖
+# 后端依赖
 cd backend
 pip install -r requirements.txt
 ```
 
-### 3. 配置环境变量
+### 环境变量配置
+前端：复制 `env.example` 为 `.env.local`，配置后端API地址。
+后端：复制 `env.example` 为 `.env`，配置端口等参数。
 
-#### 前端配置
-复制 `env.example` 为 `.env.local`：
+### 启动服务
 ```bash
-cp env.example .env.local
-```
-
-编辑 `.env.local` 文件：
-```env
-# 后端API配置
-NEXT_PUBLIC_BACKEND_URL=http://localhost:3003
-
-
-```
-
-#### 后端配置
-复制 `backend/env.example` 为 `backend/.env`：
-```bash
-cd backend
-cp env.example .env
-```
-
-编辑 `backend/.env` 文件：
-```env
-# 服务器配置
-PORT=3003
-HOST=0.0.0.0
-
-# 环境配置
-NODE_ENV=development
-
-
-```
-
-### 4. 启动服务
-
-
-```bash
-# 终端1：启动后端
+# 启动后端
 cd backend
 python main.py
-
-# 终端2：启动前端
+# 启动前端
 npm run dev
 ```
+前端：http://localhost:3000
+后端：http://localhost:3003
 
-
-前端服务运行在 `http://localhost:3000`
-后端服务运行在 `http://localhost:3003`
 
 ## 项目结构
 
@@ -124,35 +135,44 @@ project/
 - `/` - 主应用页面
 - `/test-camera` - 相机功能测试页面
 
+
 ## 使用说明
 
 ### 拍照识别
-1. 点击"拍照识别"按钮
+1. 点击“拍照识别”按钮
 2. 允许浏览器访问相机
 3. 将食物放在取景框内
-4. 点击拍照按钮
-5. 确认照片后开始识别
+4. 拍照并确认
+5. 自动识别并显示结果
 
 ### 图片上传
-1. 点击"从相册选择"按钮
-2. 选择要识别的食物图片
-3. 点击"开始识别"按钮
+1. 点击“从相册选择”按钮
+2. 选择食物图片
+3. 点击“开始识别”
+4. 显示识别结果与分析
+
 
 ## 技术栈
 
 ### 前端
-- **框架**: Next.js 13 + React 18
-- **UI组件**: Radix UI + Tailwind CSS
-- **相机功能**: react-webcam
-- **状态管理**: Zustand
-- **类型安全**: TypeScript
+- Next.js 13 + React 18
+- Radix UI + Tailwind CSS
+- Zustand 状态管理
+- TypeScript 类型安全
+- react-webcam 相机功能
 
 ### 后端
-- **框架**: FastAPI
-- **语言**: Python
-- **AI模型**: YOLO + ResNet
-- **图像处理**: OpenCV, Pillow
-- **机器学习**: PyTorch, Ultralytics
+- FastAPI 框架
+- Python 3.8+
+- YOLOv8 检测器 + ResNet50 分类器
+- OpenCV, Pillow 图像处理
+- PyTorch, Ultralytics 机器学习
+
+### 训练与推理
+- 支持 GPU 加速
+- 自动数据增强与模型保存
+- API接口统一，易于扩展
+
 
 ## 开发指南
 
@@ -172,13 +192,13 @@ uvicorn main:app --reload # 直接使用uvicorn
 
 ### 测试
 ```bash
-# 测试前后端集成
+# 集成测试
 node test-integration.js
-
-# 测试后端API
+# 后端API测试
 cd backend
 python test_api.py
 ```
+
 
 ## 部署
 
@@ -194,17 +214,17 @@ cd backend
 python start_server.py
 ```
 
-### Docker部署
+### Docker 部署
 ```bash
 # 前端
 docker build -t purine-frontend .
 docker run -p 3000:3000 purine-frontend
-
 # 后端
 cd backend
 docker build -t purine-backend .
 docker run -p 3003:3003 purine-backend
 ```
+
 
 ## 环境变量
 
@@ -212,8 +232,6 @@ docker run -p 3003:3003 purine-backend
 ```env
 # 后端API配置
 NEXT_PUBLIC_BACKEND_URL=http://localhost:3003
-
-
 ```
 
 ### 后端 (.env)
@@ -221,28 +239,27 @@ NEXT_PUBLIC_BACKEND_URL=http://localhost:3003
 # 服务器配置
 PORT=3003
 HOST=0.0.0.0
-
 # 环境配置
 NODE_ENV=development
-
-
 ```
+
 
 ## 故障排除
 
 ### 相机无法使用
-- 确保设备有摄像头
-- 检查浏览器权限设置
-- 确保使用HTTPS环境（生产环境）
+- 检查设备摄像头和浏览器权限
+- 建议生产环境使用 HTTPS
 
 ### 后端服务无法连接
 - 检查后端服务是否启动
-- 确认端口3003未被占用
+- 确认端口未被占用
 - 检查防火墙设置
 
 ### 识别失败
 - 检查网络连接
-- 确认API密钥配置正确
-- 查看浏览器控制台错误信息
+- 检查API密钥和模型文件
+- 查看后端/前端日志
+
+
 
 
