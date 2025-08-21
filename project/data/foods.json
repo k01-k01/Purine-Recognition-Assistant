@@ -1,0 +1,542 @@
+[
+  {
+    "id": "1",
+    "name": "动物肝脏",
+    "category": "动物内脏",
+    "purineLevel": "high",
+    "purineContent": "150-1000mg/100g",
+    "description": "动物内脏，高嘌呤，痛风患者应避免",
+    "image": "/imgs/猪肝.jpg"
+  },
+  {
+    "id": "2",
+    "name": "动物肾脏",
+    "category": "动物内脏",
+    "purineLevel": "high",
+    "purineContent": "200-300mg/100g",
+    "description": "动物内脏，高嘌呤，建议避免食用",
+    "image": "/imgs/猪肾.jpg"
+  },
+  {
+    "id": "3",
+    "name": "沙丁鱼",
+    "category": "海鲜类",
+    "purineLevel": "high",
+    "purineContent": "200-300mg/100g",
+    "description": "深海鱼类，高嘌呤，需要限制摄入",
+    "image": "/imgs/沙丁鱼.jpg"
+  },
+  {
+    "id": "4",
+    "name": "鳀鱼",
+    "category": "海鲜类",
+    "purineLevel": "high",
+    "purineContent": "150-200mg/100g",
+    "description": "小型海鱼，高嘌呤，建议少食",
+    "image": "/imgs/凤尾鱼.jpg"
+  },
+  {
+    "id": "5",
+    "name": "鲭鱼",
+    "category": "海鲜类",
+    "purineLevel": "high",
+    "purineContent": "150-200mg/100g",
+    "description": "深海鱼类，高嘌呤，限制食用",
+    "image": "/imgs/鲭鱼.jpg"
+  },
+  {
+    "id": "6",
+    "name": "扇贝",
+    "category": "海鲜类",
+    "purineLevel": "high",
+    "purineContent": "100-150mg/100g",
+    "description": "贝类海鲜，高嘌呤，需要控制",
+    "image": "/imgs/扇贝.jpg"
+  },
+  {
+    "id": "7",
+    "name": "浓肉汤",
+    "category": "汤类",
+    "purineLevel": "high",
+    "purineContent": "100-200mg/100ml",
+    "description": "长时间炖煮的肉汤，高嘌呤",
+    "image": "/imgs/豆制品.jpg"
+  },
+  {
+    "id": "8",
+    "name": "酵母",
+    "category": "发酵食品",
+    "purineLevel": "high",
+    "purineContent": "300-400mg/100g",
+    "description": "发酵制品，极高嘌呤，避免食用",
+    "image": "/imgs/豆制品.jpg"
+  },
+  {
+    "id": "9",
+    "name": "鸡肉",
+    "category": "禽肉类",
+    "purineLevel": "medium",
+    "purineContent": "75-100mg/100g",
+    "description": "常见禽肉，中等嘌呤，适量食用",
+    "image": "/imgs/鸡肉.jpg"
+  },
+  {
+    "id": "10",
+    "name": "鸭肉",
+    "category": "禽肉类",
+    "purineLevel": "medium",
+    "purineContent": "75-100mg/100g",
+    "description": "禽肉类，中等嘌呤，可适量食用",
+    "image": "/imgs/烧鸭.jpg"
+  },
+  {
+    "id": "11",
+    "name": "猪肉",
+    "category": "畜肉类",
+    "purineLevel": "medium",
+    "purineContent": "75-100mg/100g",
+    "description": "常见肉类，中等嘌呤，控制摄入量",
+    "image": "/imgs/猪肉.jpg"
+  },
+  {
+    "id": "12",
+    "name": "牛肉",
+    "category": "畜肉类",
+    "purineLevel": "medium",
+    "purineContent": "75-100mg/100g",
+    "description": "红肉类，中等嘌呤，适量食用",
+    "image": "/imgs/牛肉.jpg"
+  },
+  {
+    "id": "13",
+    "name": "羊肉",
+    "category": "畜肉类",
+    "purineLevel": "medium",
+    "purineContent": "75-100mg/100g",
+    "description": "红肉类，中等嘌呤，控制食用",
+    "image": "/imgs/羊肉.jpg"
+  },
+  {
+    "id": "14",
+    "name": "鲤鱼",
+    "category": "淡水鱼",
+    "purineLevel": "medium",
+    "purineContent": "75-100mg/100g",
+    "description": "淡水鱼类，中等嘌呤，可适量食用",
+    "image": "/imgs/鲤鱼.jpg"
+  },
+  {
+    "id": "15",
+    "name": "鲈鱼",
+    "category": "淡水鱼",
+    "purineLevel": "medium",
+    "purineContent": "75-100mg/100g",
+    "description": "常见鱼类，中等嘌呤，适量食用",
+    "image": "/imgs/海鲈鱼.jpg"
+  },
+  {
+    "id": "16",
+    "name": "草鱼",
+    "category": "淡水鱼",
+    "purineLevel": "medium",
+    "purineContent": "75-100mg/100g",
+    "description": "淡水鱼类，中等嘌呤，可食用",
+    "image": "/imgs/草鱼.jpg"
+  },
+  {
+    "id": "17",
+    "name": "虾",
+    "category": "海鲜类",
+    "purineLevel": "medium",
+    "purineContent": "100-150mg/100g",
+    "description": "甲壳类海鲜，中等嘌呤，控制食用",
+    "image": "/imgs/基围虾.jpg"
+  },
+  {
+    "id": "18",
+    "name": "螃蟹",
+    "category": "海鲜类",
+    "purineLevel": "medium",
+    "purineContent": "100-150mg/100g",
+    "description": "甲壳类海鲜，中等嘌呤，适量食用",
+    "image": "/imgs/大闸蟹.jpg"
+  },
+  {
+    "id": "19",
+    "name": "龙虾",
+    "category": "海鲜类",
+    "purineLevel": "medium",
+    "purineContent": "100-150mg/100g",
+    "description": "甲壳类海鲜，中等嘌呤，控制摄入",
+    "image": "/imgs/龙虾.jpg"
+  },
+  {
+    "id": "20",
+    "name": "豌豆",
+    "category": "豆类",
+    "purineLevel": "medium",
+    "purineContent": "75-100mg/100g",
+    "description": "豆类蔬菜，中等嘌呤，可适量食用",
+    "image": "/imgs/豌豆.jpg"
+  },
+  {
+    "id": "21",
+    "name": "扁豆",
+    "category": "豆类",
+    "purineLevel": "medium",
+    "purineContent": "75-100mg/100g",
+    "description": "豆类蔬菜，中等嘌呤，适量食用",
+    "image": "/imgs/豆角.jpg"
+  },
+  {
+    "id": "22",
+    "name": "蘑菇",
+    "category": "菌菇类",
+    "purineLevel": "medium",
+    "purineContent": "50-75mg/100g",
+    "description": "菌菇类，中等嘌呤，可适量食用",
+    "image": "/imgs/平菇.jpg"
+  },
+  {
+    "id": "23",
+    "name": "香菇",
+    "category": "菌菇类",
+    "purineLevel": "medium",
+    "purineContent": "50-75mg/100g",
+    "description": "常见菌菇，中等嘌呤，适量食用",
+    "image": "/imgs/香菇.jpg"
+  },
+  {
+    "id": "24",
+    "name": "菠菜",
+    "category": "绿叶蔬菜",
+    "purineLevel": "medium",
+    "purineContent": "50-75mg/100g",
+    "description": "绿叶蔬菜，中等嘌呤，可食用",
+    "image": "/imgs/菠菜.jpg"
+  },
+  {
+    "id": "25",
+    "name": "芦笋",
+    "category": "蔬菜类",
+    "purineLevel": "medium",
+    "purineContent": "50-75mg/100g",
+    "description": "嫩茎蔬菜，中等嘌呤，适量食用",
+    "image": "/imgs/豆制品.jpg"
+  },
+  {
+    "id": "26",
+    "name": "米饭",
+    "category": "谷物类",
+    "purineLevel": "low",
+    "purineContent": "0-30mg/100g",
+    "description": "主食，低嘌呤，可以放心食用",
+    "image": "/imgs/大米.jpg"
+  },
+  {
+    "id": "27",
+    "name": "面条",
+    "category": "谷物类",
+    "purineLevel": "low",
+    "purineContent": "0-30mg/100g",
+    "description": "面食，低嘌呤，适合日常食用",
+    "image": "/imgs/挂面.jpg"
+  },
+  {
+    "id": "28",
+    "name": "面包",
+    "category": "谷物类",
+    "purineLevel": "low",
+    "purineContent": "0-30mg/100g",
+    "description": "烘焙食品，低嘌呤，可以食用",
+    "image": "/imgs/面包.jpg"
+  },
+  {
+    "id": "29",
+    "name": "燕麦",
+    "category": "谷物类",
+    "purineLevel": "low",
+    "purineContent": "0-30mg/100g",
+    "description": "健康谷物，低嘌呤，推荐食用",
+    "image": "/imgs/燕麦.jpg"
+  },
+  {
+    "id": "30",
+    "name": "玉米",
+    "category": "谷物类",
+    "purineLevel": "low",
+    "purineContent": "0-30mg/100g",
+    "description": "粗粮，低嘌呤，健康选择",
+    "image": "/imgs/玉米面.jpg"
+  },
+  {
+    "id": "31",
+    "name": "土豆",
+    "category": "根茎类",
+    "purineLevel": "low",
+    "purineContent": "0-30mg/100g",
+    "description": "根茎蔬菜，低嘌呤，可以食用",
+    "image": "/imgs/马铃薯.jpg"
+  },
+  {
+    "id": "32",
+    "name": "红薯",
+    "category": "根茎类",
+    "purineLevel": "low",
+    "purineContent": "0-30mg/100g",
+    "description": "健康薯类，低嘌呤，推荐食用",
+    "image": "/imgs/甘薯.jpg"
+  },
+  {
+    "id": "33",
+    "name": "胡萝卜",
+    "category": "根茎类",
+    "purineLevel": "low",
+    "purineContent": "0-30mg/100g",
+    "description": "根茎蔬菜，低嘌呤，营养丰富",
+    "image": "/imgs/胡萝卜.jpg"
+  },
+  {
+    "id": "34",
+    "name": "白萝卜",
+    "category": "根茎类",
+    "purineLevel": "low",
+    "purineContent": "0-30mg/100g",
+    "description": "常见蔬菜，低嘌呤，可以食用",
+    "image": "/imgs/白萝卜.jpg"
+  },
+  {
+    "id": "35",
+    "name": "白菜",
+    "category": "绿叶蔬菜",
+    "purineLevel": "low",
+    "purineContent": "0-30mg/100g",
+    "description": "绿叶蔬菜，低嘌呤，健康食材",
+    "image": "/imgs/大白菜.jpg"
+  },
+  {
+    "id": "36",
+    "name": "卷心菜",
+    "category": "绿叶蔬菜",
+    "purineLevel": "low",
+    "purineContent": "0-30mg/100g",
+    "description": "十字花科蔬菜，低嘌呤，推荐",
+    "image": "/imgs/大头菜.jpg"
+  },
+  {
+    "id": "37",
+    "name": "西兰花",
+    "category": "十字花科",
+    "purineLevel": "low",
+    "purineContent": "0-30mg/100g",
+    "description": "营养蔬菜，低嘌呤，健康选择",
+    "image": "/imgs/西兰花[绿菜花].jpg"
+  },
+  {
+    "id": "38",
+    "name": "花椰菜",
+    "category": "十字花科",
+    "purineLevel": "low",
+    "purineContent": "0-30mg/100g",
+    "description": "十字花科蔬菜，低嘌呤，可食用",
+    "image": "/imgs/菜花[花椰菜].jpg"
+  },
+  {
+    "id": "39",
+    "name": "黄瓜",
+    "category": "瓜果类",
+    "purineLevel": "low",
+    "purineContent": "0-30mg/100g",
+    "description": "清爽蔬菜，低嘌呤，适合食用",
+    "image": "/imgs/黄瓜.jpg"
+  },
+  {
+    "id": "40",
+    "name": "冬瓜",
+    "category": "瓜果类",
+    "purineLevel": "low",
+    "purineContent": "0-30mg/100g",
+    "description": "瓜类蔬菜，低嘌呤，利尿效果",
+    "image": "/imgs/冬瓜.jpg"
+  },
+  {
+    "id": "41",
+    "name": "西红柿",
+    "category": "茄果类",
+    "purineLevel": "low",
+    "purineContent": "0-30mg/100g",
+    "description": "常见蔬果，低嘌呤，营养价值高",
+    "image": "/imgs/番茄[西红柿].jpg"
+  },
+  {
+    "id": "42",
+    "name": "茄子",
+    "category": "茄果类",
+    "purineLevel": "low",
+    "purineContent": "0-30mg/100g",
+    "description": "茄果类蔬菜，低嘌呤，可以食用",
+    "image": "/imgs/豆制品.jpg"
+  },
+  {
+    "id": "43",
+    "name": "青椒",
+    "category": "茄果类",
+    "purineLevel": "low",
+    "purineContent": "0-30mg/100g",
+    "description": "辣椒类蔬菜，低嘌呤，适合食用",
+    "image": "/imgs/青椒.jpg"
+  },
+  {
+    "id": "44",
+    "name": "豆腐",
+    "category": "豆制品",
+    "purineLevel": "low",
+    "purineContent": "30-50mg/100g",
+    "description": "大豆制品，低嘌呤，优质蛋白",
+    "image": "/imgs/水豆腐.jpg"
+  },
+  {
+    "id": "45",
+    "name": "豆浆",
+    "category": "豆制品",
+    "purineLevel": "low",
+    "purineContent": "10-30mg/100ml",
+    "description": "大豆饮品，低嘌呤，营养丰富",
+    "image": "/imgs/生豆浆.jpg"
+  },
+  {
+    "id": "46",
+    "name": "鸡蛋",
+    "category": "蛋类",
+    "purineLevel": "low",
+    "purineContent": "0-15mg/100g",
+    "description": "优质蛋白质，低嘌呤，推荐食用",
+    "image": "/imgs/鸡蛋.jpg"
+  },
+  {
+    "id": "47",
+    "name": "鸭蛋",
+    "category": "蛋类",
+    "purineLevel": "low",
+    "purineContent": "0-15mg/100g",
+    "description": "禽蛋类，低嘌呤，营养价值高",
+    "image": "/imgs/鹅蛋.jpg"
+  },
+  {
+    "id": "48",
+    "name": "牛奶",
+    "category": "乳制品",
+    "purineLevel": "low",
+    "purineContent": "0-10mg/100ml",
+    "description": "乳制品，低嘌呤，补充钙质",
+    "image": "/imgs/豆制品.jpg"
+  },
+  {
+    "id": "49",
+    "name": "酸奶",
+    "category": "乳制品",
+    "purineLevel": "low",
+    "purineContent": "0-10mg/100ml",
+    "description": "发酵乳制品，低嘌呤，有益肠道",
+    "image": "/imgs/豆制品.jpg"
+  },
+  {
+    "id": "50",
+    "name": "奶酪",
+    "category": "乳制品",
+    "purineLevel": "low",
+    "purineContent": "0-15mg/100g",
+    "description": "乳制品，低嘌呤，适量食用",
+    "image": "/imgs/豆制品.jpg"
+  },
+  {
+    "id": "51",
+    "name": "苹果",
+    "category": "水果类",
+    "purineLevel": "low",
+    "purineContent": "0-10mg/100g",
+    "description": "常见水果，低嘌呤，营养丰富",
+    "image": "/imgs/苹果.jpg"
+  },
+  {
+    "id": "52",
+    "name": "香蕉",
+    "category": "水果类",
+    "purineLevel": "low",
+    "purineContent": "0-10mg/100g",
+    "description": "热带水果，低嘌呤，能量补充",
+    "image": "/imgs/香蕉.jpg"
+  },
+  {
+    "id": "53",
+    "name": "橙子",
+    "category": "水果类",
+    "purineLevel": "low",
+    "purineContent": "0-10mg/100g",
+    "description": "柑橘类水果，低嘌呤，维C丰富",
+    "image": "/imgs/蜜橘.jpg"
+  },
+  {
+    "id": "54",
+    "name": "葡萄",
+    "category": "水果类",
+    "purineLevel": "low",
+    "purineContent": "0-10mg/100g",
+    "description": "浆果类水果，低嘌呤，抗氧化",
+    "image": "/imgs/巨峰葡萄.jpg"
+  },
+  {
+    "id": "55",
+    "name": "西瓜",
+    "category": "水果类",
+    "purineLevel": "low",
+    "purineContent": "0-10mg/100g",
+    "description": "瓜类水果，低嘌呤，水分充足",
+    "image": "/imgs/西瓜.jpg"
+  },
+  {
+    "id": "56",
+    "name": "草莓",
+    "category": "水果类",
+    "purineLevel": "low",
+    "purineContent": "0-10mg/100g",
+    "description": "浆果类水果，低嘌呤，维C丰富",
+    "image": "/imgs/豆制品.jpg"
+  },
+  {
+    "id": "57",
+    "name": "蓝莓",
+    "category": "水果类",
+    "purineLevel": "low",
+    "purineContent": "0-10mg/100g",
+    "description": "超级水果，低嘌呤，抗氧化强",
+    "image": "/imgs/豆制品.jpg"
+  },
+  {
+    "id": "58",
+    "name": "樱桃",
+    "category": "水果类",
+    "purineLevel": "low",
+    "purineContent": "0-10mg/100g",
+    "description": "核果类水果，低嘌呤，抗炎效果",
+    "image": "/imgs/樱桃.jpg"
+  },
+  {
+    "id": "59",
+    "name": "核桃",
+    "category": "坚果类",
+    "purineLevel": "low",
+    "purineContent": "10-25mg/100g",
+    "description": "坚果类，低嘌呤，健康脂肪",
+    "image": "/imgs/豆制品.jpg"
+  },
+  {
+    "id": "60",
+    "name": "杏仁",
+    "category": "坚果类",
+    "purineLevel": "low",
+    "purineContent": "10-25mg/100g",
+    "description": "坚果类，低嘌呤，营养密集",
+    "image": "/imgs/杏仁.jpg"
+  }
+]

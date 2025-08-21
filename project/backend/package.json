@@ -1,0 +1,37 @@
+{
+  "name": "food-recognition-backend",
+  "version": "2.0.0",
+  "description": "基于YOLO+ResNet融合模型的食物识别和尿酸分析API",
+  "main": "src/server.ts",
+  "scripts": {
+    "start": "ts-node src/server.ts",
+    "dev": "nodemon",
+    "build": "tsc",
+    "test": "node test_api.js"
+  },
+  "dependencies": {
+    "fastify": "^4.24.3",
+    "@fastify/cors": "^8.4.0",
+    "@fastify/multipart": "^8.0.0",
+    "@fastify/static": "^6.12.0",
+    "pino": "^8.16.0",
+    "pino-pretty": "^10.2.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.0",
+    "@types/fs-extra": "^11.0.1",
+    "typescript": "^5.2.2",
+    "ts-node": "^10.9.1",
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [
+    "food-recognition",
+    "yolo",
+    "resnet",
+    "fastapi",
+    "uric-acid",
+    "gout"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}

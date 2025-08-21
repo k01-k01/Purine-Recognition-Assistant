@@ -1,0 +1,96 @@
+# Food20数据集训练配置
+
+# ResNet分类器配置
+resnet:
+  epochs: 3
+  batch_size: 32
+  learning_rate: 0.001
+  num_classes: 20  # Food20有20个类别
+  model_save_path: "models/resnet_food20_classifier.pth"
+  
+  # 数据增强配置
+  data_augmentation:
+    random_horizontal_flip: true
+    random_rotation: 10
+    color_jitter:
+      brightness: 0.2
+      contrast: 0.2
+      saturation: 0.2
+      hue: 0.1
+
+# YOLO检测器配置
+yolo:
+  epochs: 3
+  batch_size: 16
+  learning_rate: 0.01
+  model_save_path: "models/yolo_food20_detector.pt"
+  
+  # 训练参数
+  image_size: 640
+  save_period: 10
+  
+  # 模型配置
+  model_type: "yolov8n"  # yolov8n, yolov8s, yolov8m, yolov8l, yolov8x
+
+# 数据集配置
+data:
+  dataset_path: "project/backend/datasets/Food20_new"
+  train_path: "project/backend/datasets/Food20_new/train"
+  val_path: "project/backend/datasets/Food20_new/val"
+  test_path: "project/backend/datasets/Food20_new/test"
+  
+  # 数据预处理
+  image_size: 224  # ResNet输入尺寸
+  normalize:
+    mean: [0.485, 0.456, 0.406]
+    std: [0.229, 0.224, 0.225]
+
+# 训练配置
+training:
+  device: "auto"  # auto, cpu, cuda
+  num_workers: 4
+  pin_memory: true
+  
+  # 早停配置
+  early_stopping:
+    enabled: true
+    patience: 10
+    min_delta: 0.001
+  
+  # 学习率调度
+  scheduler:
+    type: "step"  # step, cosine, exponential
+    step_size: 10
+    gamma: 0.1
+
+# 日志配置
+logging:
+  level: "INFO"
+  save_logs: true
+  log_dir: "logs"
+  
+  # TensorBoard配置
+  tensorboard:
+    enabled: true
+    log_dir: "logs/tensorboard"
+
+# 模型保存配置
+model_saving:
+  save_best: true
+  save_last: true
+  save_optimizer: false
+  
+  # 检查点配置
+  checkpoint:
+    enabled: true
+    save_frequency: 5  # 每N个epoch保存一次
+
+# 评估配置
+evaluation:
+  metrics: ["accuracy", "precision", "recall", "f1"]
+  test_on_best: true
+  
+  # 混淆矩阵
+  confusion_matrix:
+    enabled: true
+    save_path: "logs/confusion_matrix.png" 

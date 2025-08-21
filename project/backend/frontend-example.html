@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>食物识别API示例</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .upload-area {
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        .upload-area:hover {
+            border-color: #007bff;
+        }
+        .upload-area.dragover {
+            border-color: #007bff;
+            background-color: #f8f9fa;
+        }
+        #fileInput {
+            display: none;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .btn:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        .preview {
+            max-width: 300px;
+            max-height: 300px;
+            margin: 20px auto;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+        }
+        .loading {
+            text-align: center;
+            color: #666;
+        }
+        .error {
+            color: #dc3545;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        .success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+        .food-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .info-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .info-card h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+            font-size: 16px;
+        }
+        .purine-high { color: #dc3545; }
+        .purine-medium { color: #ffc107; }
+        .purine-low { color: #28a745; }
+        .nutrition-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .nutrition-item {
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍽️ 食物识别API示例</h1>
+        
+        <div class="upload-area" id="uploadArea">
+            <p>📷 点击或拖拽图片到此处</p>
+            <p style="color: #666; font-size: 14px;">支持 JPG、PNG、GIF 格式，最大 8MB</p>
+            <input type="file" id="fileInput" accept="image/*">
+        </div>
+        
+        <div style="text-align: center;">
+            <button class="btn" id="recognizeBtn" disabled>🔍 开始识别</button>
+            <button class="btn" id="clearBtn" disabled>🗑️ 清除</button>
+        </div>
+        
+        <div id="result" style="display: none;"></div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:3003';
+        
+        // DOM元素
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const recognizeBtn = document.getElementById('recognizeBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const resultDiv = document.getElementById('result');
+        
+        let selectedFile = null;
+        let imagePreview = null;
+        
+        // 事件监听
+        uploadArea.addEventListener('click', () => fileInput.click());
+        uploadArea.addEventListener('dragover', handleDragOver);
+        uploadArea.addEventListener('drop', handleDrop);
+        fileInput.addEventListener('change', handleFileSelect);
+        recognizeBtn.addEventListener('click', recognizeFood);
+        clearBtn.addEventListener('click', clearAll);
+        
+        // 拖拽处理
+        function handleDragOver(e) {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        }
+        
+        function handleDrop(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFile(files[0]);
+            }
+        }
+        
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (file) {
+                handleFile(file);
+            }
+        }
+        
+        function handleFile(file) {
+            // 验证文件类型
+            if (!file.type.startsWith('image/')) {
+                alert('请选择图片文件！');
+                return;
+            }
+            
+            // 验证文件大小 (8MB)
+            if (file.size > 8 * 1024 * 1024) {
+                alert('图片大小不能超过8MB！');
+                return;
+            }
+            
+            selectedFile = file;
+            
+            // 显示预览
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                if (imagePreview) {
+                    imagePreview.remove();
+                }
+                
+                imagePreview = document.createElement('img');
+                imagePreview.src = e.target.result;
+                imagePreview.className = 'preview';
+                uploadArea.appendChild(imagePreview);
+                
+                recognizeBtn.disabled = false;
+                clearBtn.disabled = false;
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        async function recognizeFood() {
+            if (!selectedFile) return;
+            
+            try {
+                recognizeBtn.disabled = true;
+                recognizeBtn.textContent = '🔍 识别中...';
+                
+                // 显示加载状态
+                showResult('<div class="loading">正在识别食物，请稍候...</div>');
+                
+                // 转换图片为base64
+                const base64 = await fileToBase64(selectedFile);
+                
+                // 调用API
+                const response = await fetch(`${API_BASE_URL}/api/recognize`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        image: base64.split(',')[1] // 移除data:image/...;base64,前缀
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    displayResult(result.data);
+                } else {
+                    showError(result.error || '识别失败');
+                }
+                
+            } catch (error) {
+                console.error('识别失败:', error);
+                showError('网络错误或服务器不可用');
+            } finally {
+                recognizeBtn.disabled = false;
+                recognizeBtn.textContent = '🔍 开始识别';
+            }
+        }
+        
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+        
+        function displayResult(data) {
+            const purineClass = `purine-${data.purineLevel}`;
+            const suitableText = data.suitableForGout ? '✅ 适合' : '❌ 不适合';
+            const suitableClass = data.suitableForGout ? 'success' : 'error';
+            
+            const html = `
+                <div class="result success">
+                    <h2>🍽️ 识别结果</h2>
+                    <div class="food-info">
+                        <div class="info-card">
+                            <h3>食物名称</h3>
+                            <p>${data.foodName}</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>嘌呤含量</h3>
+                            <p class="${purineClass}">
+                                ${data.purineLevel.toUpperCase()} - ${data.purineContent}
+                            </p>
+                        </div>
+                        <div class="info-card">
+                            <h3>适合高尿酸患者</h3>
+                            <p class="${suitableClass}">${suitableText}</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>识别置信度</h3>
+                            <p>${(data.confidence * 100).toFixed(1)}%</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card" style="grid-column: 1 / -1;">
+                        <h3>营养成分 (每100g)</h3>
+                        <div class="nutrition-grid">
+                            <div class="nutrition-item">🔥 热量: ${data.nutritionEstimate.calories}</div>
+                            <div class="nutrition-item">🥩 蛋白质: ${data.nutritionEstimate.protein}</div>
+                            <div class="nutrition-item">🧈 脂肪: ${data.nutritionEstimate.fat}</div>
+                            <div class="nutrition-item">🍞 碳水化合物: ${data.nutritionEstimate.carbohydrates}</div>
+                            <div class="nutrition-item">🌾 膳食纤维: ${data.nutritionEstimate.fiber}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card" style="grid-column: 1 / -1;">
+                        <h3>💡 食用建议</h3>
+                        <p>${data.advice}</p>
+                    </div>
+                </div>
+            `;
+            
+            showResult(html);
+        }
+        
+        function showError(message) {
+            const html = `
+                <div class="result error">
+                    <h3>❌ 识别失败</h3>
+                    <p>${message}</p>
+                </div>
+            `;
+            showResult(html);
+        }
+        
+        function showResult(content) {
+            resultDiv.innerHTML = content;
+            resultDiv.style.display = 'block';
+        }
+        
+        function clearAll() {
+            selectedFile = null;
+            if (imagePreview) {
+                imagePreview.remove();
+                imagePreview = null;
+            }
+            fileInput.value = '';
+            resultDiv.style.display = 'none';
+            recognizeBtn.disabled = true;
+            clearBtn.disabled = true;
+            uploadArea.classList.remove('dragover');
+        }
+        
+        // 页面加载时检查服务器状态
+        window.addEventListener('load', async () => {
+            try {
+                const response = await fetch(`${API_BASE_URL}/health`);
+                if (!response.ok) {
+                    throw new Error('服务器不可用');
+                }
+                console.log('✅ 服务器连接正常');
+            } catch (error) {
+                console.error('❌ 服务器连接失败:', error.message);
+                alert('无法连接到服务器，请确保后端服务正在运行！');
+            }
+        });
+    </script>
+</body>
+</html> 

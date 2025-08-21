@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_BACKEND_URL=http://backend:3003
+    depends_on:
+      - backend
+    networks:
+      - purine-network
+
+  backend:
+    build: ./backend
+    ports:
+      - "3003:3003"
+    environment:
+      - NODE_ENV=production
+              - PORT=3003
+      - HOST=0.0.0.0
+    networks:
+      - purine-network
+
+networks:
+  purine-network:
+    driver: bridge 

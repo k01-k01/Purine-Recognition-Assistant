@@ -1,0 +1,35 @@
+# Food20模型训练依赖
+
+# PyTorch核心
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+
+# YOLO检测
+ultralytics>=8.0.0
+
+# 数据处理
+numpy>=1.21.0
+Pillow>=8.3.0
+opencv-python>=4.5.0
+
+# 配置和日志
+PyYAML>=6.0
+tensorboard>=2.10.0
+
+# 图像处理
+albumentations>=1.3.0
+
+# 科学计算
+scipy>=1.7.0
+scikit-learn>=1.0.0
+
+# 进度条
+tqdm>=4.62.0
+
+# 可视化
+matplotlib>=3.5.0
+seaborn>=0.11.0
+
+# 其他工具
+requests>=2.25.0 
